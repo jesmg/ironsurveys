@@ -80,6 +80,9 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+const surveysRoutes = require('./routes/surveys');
+app.use('/surveys', surveysRoutes)
       
 
 module.exports = app;
