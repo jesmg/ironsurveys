@@ -7,9 +7,10 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
-
 router.get("/login", (req, res, next) => {
-  res.render("auth/login", { "message": req.flash("error") });
+  res.render("auth/login", {
+    "message": req.flash("error")
+  });
 });
 
 router.post("/login", passport.authenticate("local", {
@@ -24,34 +25,51 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  if (username === "" || password === "") {
-    res.render("auth/signup", { message: "Indicate username and password" });
+  const {
+    username,
+    password,
+    role,
+    email
+  } = req.body;
+  console.log(req.body);
+  if (username === "" || password === "" || email === "") {
+    res.render("auth/signup", {
+      message: "Indicate username, email and password"
+    });
     return;
   }
 
-  User.findOne({ username }, "username", (err, user) => {
+  User.findOne({
+    username
+  }, "username", (err, user) => {
     if (user !== null) {
-      res.render("auth/signup", { message: "The username already exists" });
+      res.render("auth/signup", {
+        message: "The username already exists"
+      });
       return;
     }
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
+
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      email,
+      role: [req.body.role]
     });
 
     newUser.save()
-    .then(() => {
-      res.redirect("/");
-    })
-    .catch(err => {
-      res.render("auth/signup", { message: "Something went wrong" });
-    })
+      .then(() => {
+        console.log(newUser.role);
+        res.redirect("/");
+      })
+      .catch(err => {
+        res.render("auth/signup", {
+          message: "Something went wrong"
+        });
+      })
   });
 });
 

@@ -1,0 +1,18 @@
+const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
+
+const surveySchema = new Schema({
+  text: String,
+  rating: Number,
+  designer: {type: Schema.Types.ObjectId, ref:'Designer'},
+  user: {type: Schema.Types.ObjectId, ref:'User'},
+  reward_points: Number
+}, {
+  timestamps: {
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
+  }
+});
+
+const Survey = mongoose.model('Survey', surveySchema);
+module.exports = Survey;
