@@ -9,7 +9,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/designer_dashboard', [
   ensureLoggedIn('auth/login'),
-  hasRole('Designer')
+  hasRole()
 ], (req, res) =>{
   res.render('dashboards/designer_dashboard')
 })
@@ -18,7 +18,7 @@ router.get('/designer_dashboard', [
 // Añadir render con login
 router.get('/user_dashboard', [
   ensureLoggedIn('auth/login'),
-  hasRole('User')
+  hasRole(undefined ,'User')
 ], (req, res) =>{
   res.render('dashboards/user_dashboard')
 })
