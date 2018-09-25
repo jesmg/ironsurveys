@@ -13,6 +13,7 @@ router.get('/designer_dashboard', [
 ], (req, res) =>{
   res.render('dashboards/designer_dashboard')
 })
+
 // Añadir redirect error
 // Añadir render con login
 router.get('/user_dashboard', [
@@ -21,5 +22,19 @@ router.get('/user_dashboard', [
 ], (req, res) =>{
   res.render('dashboards/user_dashboard')
 })
+
+router.post("/designer_dashboard", (req, res, next) =>{
+  const question = req.body.question
+  const newSurvey = new Survey({
+    question, 
+    response
+  })
+  newSurvey.save((err) =>{
+    if(err){
+      res.render("survey")
+    }
+  })
+})
+
 
 module.exports = router;

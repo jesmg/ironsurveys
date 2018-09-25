@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 const surveySchema = new Schema({
   question: String,
-  response: Number,
+  response: Number
   // uniqueResponse: String,
   // reward_points: Number
 }, {
