@@ -1,8 +1,12 @@
 <h1>Designer Dashboard</h1>
 
-<form id="form" action="/surveys" method="POST">
+<form id="form" action="/designer_dashboard" method="POST">
   <input type="text" name="question" id="question-id" placeholder="introduce your question">
   <button id="create-survey">
     <small>Create Survey</small>
   </button>
 </form>
+{{#each surveys}}
+  <li>{{this.question}}</li>
+
+{{/each}}
