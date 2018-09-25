@@ -39,7 +39,7 @@ const isUser = (req, res, next) => {
   }
 }
 
-const hasRole = (redirectTo="/auth/login", role="Designer") => {
+const hasRole = (redirectTo="/", role="Designer") => {
   return (req, res, next) => {
     console.log(req.user.role)
     if (req.user.role.includes(role)) {

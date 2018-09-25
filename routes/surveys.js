@@ -5,12 +5,11 @@ const {
 const router = express.Router();
 
 router.get("/",
-  hasRole(),
+  hasRole(undefined, 'Designer'),
   (req, res, next) => {
     res.render("dashboards/surveys")
   })
 
-  //post new survey
 
   
 module.exports = router;
