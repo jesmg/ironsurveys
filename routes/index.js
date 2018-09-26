@@ -33,26 +33,43 @@ router.get('/user_dashboard', [
   .catch( err => console.log(err));
 
 })
+router.get("/surveys/:id", (req, res, next) => {
+  let surveyId = req.params.id;
+  Survey.findOne({'_id':surveyId})
+  .then(survey =>{
+    res.render('dashboards/surveys', {survey})
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+
+
+
 
 // Create new survey
 router.post("/designer_dashboard", (req, res, next) =>{
-  const surveyName = req.body.survey
+  const surveyName = req.body.surveyName
   let user = req.body.users_select
+  
   if(!Array.isArray(user)){
     user=[user]
   }
+  let question = req.body.question
+  console.log(question)
 
   const newSurvey = new Survey({
-    surveyName,
+    title: surveyName,
+    questions: [question],
     access: user,
-    response: []
+    responses: []
   })
   newSurvey.save()
   .then((survey)=> {
     res.redirect("/designer_dashboard");
   })
 })
-
 
 
 

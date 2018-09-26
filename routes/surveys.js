@@ -8,7 +8,6 @@ router.get("/",
     res.render("dashboards/surveys")
   })
 
-  //post new survey
 
   
 module.exports = router;

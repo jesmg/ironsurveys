@@ -2,12 +2,13 @@
 
 <form id="form" action="/designer_dashboard" method="POST">
   <input type="text" name="surveyName" id="surveyName-id" placeholder="introduce your survey">
-  <input type="checkbox" name="user" id="user-check"> <span>{{user.name}}</span>
   <br>
   <button id="create-survey">
     <small>Create Survey</small>
   </button>
-
+  <br>
+  <input type="text" name="question" id="question-id" placeholder="introduce your question">
+  <br>
   <select multiple name="users_select" id="user_selectID">
     {{#each users}}
     <option value="{{this.id}}">
@@ -19,7 +20,7 @@
 </form>
 
 {{#each surveys}}
-  <li>{{this}}</li>
+  <li>{{this.title}}</li>
 {{/each}}
 
 

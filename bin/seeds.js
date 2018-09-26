@@ -33,7 +33,7 @@ let users = [
 let surveys = [
   {
     title: "First Survey",
-    questions: [{response:"Is this a survey?"}],
+    question: [{response:"Is this a survey?"}],
     access: [{type: Schema.Types.ObjectId, ref: 'User'}]
   }
 ]
