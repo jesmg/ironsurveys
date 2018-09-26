@@ -1,10 +1,8 @@
 const express = require('express');
 const { ensureLoggedIn, hasRole } = require('../middleware/ensureLogin');
 const router  = express.Router();
-const Survey = require('../models/Question');
+const Survey = require('../models/Survey');
 const Users = require('../models/User');
-
-
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -38,16 +36,16 @@ router.get('/user_dashboard', [
 
 // Create new survey
 router.post("/designer_dashboard", (req, res, next) =>{
-  const question = req.body.question
+  const surveyName = req.body.survey
   let user = req.body.users_select
   if(!Array.isArray(user)){
     user=[user]
   }
 
   const newSurvey = new Survey({
-    question,
+    surveyName,
     access: user,
-    response: {}
+    response: []
   })
   newSurvey.save()
   .then((survey)=> {

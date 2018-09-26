@@ -4,8 +4,6 @@ const Schema   = mongoose.Schema;
 const userSchema = new Schema({
   username: String,
   password: String,
-  points: Number,
-  rewards: Number,
   role: {type:String, enum: ["User", "Designer"]}
 }, {
   timestamps: {
