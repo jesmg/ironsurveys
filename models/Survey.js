@@ -3,9 +3,9 @@ const Schema   = mongoose.Schema;
 
 const surveySchema = new Schema({
   question: String,
-  response: Number
-  // uniqueResponse: String,
-  // reward_points: Number
+  question: [],
+  response: []
+
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -15,3 +15,11 @@ const surveySchema = new Schema({
 
 const Survey = mongoose.model('Survey', surveySchema);
 module.exports = Survey;
+
+
+
+/* 
+formulario para crear las respuestas
+
+
+*/
