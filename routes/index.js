@@ -44,9 +44,17 @@ router.get("/surveys/:id", (req, res, next) => {
   })
 })
 
+router.post("/surveys/:id", (req, res, next) => {
+  console.log("entra")
+  let value = req.body.value;
+  console.log(value)
+  Survey.findByIdAndUpdate(req.params.id, {$push: {responses: [value]}} ,{new:true})
+  .then( () => {
+    console.log(survey.responses)
+    res.render("dashboards/user_dashboard")
+  })
 
-
-
+})
 
 // Create new survey
 router.post("/designer_dashboard", (req, res, next) =>{
@@ -70,9 +78,6 @@ router.post("/designer_dashboard", (req, res, next) =>{
     res.redirect("/designer_dashboard");
   })
 })
-
-
-
 
 // Añadir redirect error
 // Añadir render con login
