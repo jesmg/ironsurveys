@@ -1,6 +1,8 @@
 const express = require('express');
 const {hasRole} = require('../middleware/ensureLogin');
 const router = express.Router();
+const Survey = require('../models/Survey');
+const Users = require('../models/User');
 
 router.get("/",
   hasRole(undefined, 'Designer'),
@@ -8,31 +10,21 @@ router.get("/",
     res.render("dashboards/surveys")
   })
 
+/* Esto lleva a las rutas de los resultados de cada encuesta */
 
-
-  
-
-  // hacer npm install chart.js --save
-
-// coger datos de survey y ponerlos en el gráfico
-/*
-
-let ctx = document.getElementById("chart").getContext('2d');
-let chart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels [meter un bucle for que itere entre lo que tenemos en datos] response.user[]
-    datasets: [{
-      label: '',
-      data: [meter un bucle for que itere entre lo que tenemos a la vez que itera en labels response.data[] ]]
-    }]
-  },
-})
-*/
-
-
-
-
-
+  router.get("/results/:id", (req, res, next) => {
+    let surveyId = req.params.id;
+    Survey.findById(surveyId)
+    .then(survey =>{
+      let responses = JSON.stringify(survey.responses)
+      let questions = JSON.parse(JSON.stringify(survey.questions))
+      console.log("esto son las responses --------------------" + responses)
+      console.log("esto son las questions --------------------" + questions)
+      res.render('dashboards/results', {survey, responses, questions})
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  })
   
 module.exports = router;

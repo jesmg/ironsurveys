@@ -35,7 +35,7 @@ router.get('/user_dashboard', [
 })
 router.get("/surveys/:id", (req, res, next) => {
   let surveyId = req.params.id;
-  Survey.findOne({'_id':surveyId})
+  Survey.findById(surveyId)
   .then(survey =>{
     res.render('dashboards/surveys', {survey})
   })
