@@ -1,10 +1,19 @@
 <h1>{{survey.title}}</h1>
-<ul>
-  <li>{{survey.questions}}</li>
+  <h3>{{survey.questions}}</h3>
   <form action="/surveys/{{survey._id}}" method="post">
-    <li><input type="checkbox" name="check" value="1">1</li>
+      <select  name="check">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
     <button>
       <small>Send opinion</small>
     </button>
   </form>
-</ul>
