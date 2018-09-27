@@ -44,15 +44,46 @@ router.get("/surveys/:id", (req, res, next) => {
   })
 })
 
+//  Select value 
 router.post("/surveys/:id", (req, res, next) => {
+<<<<<<< HEAD
   const check = req.body.check;  
   let params = req.params.id;
   Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
   .then( survey => {
     res.render("dashboards/user_dashboard")
   }).catch((err) => console.log(err))
+=======
+  
+  const check = req.body.check;
+  let params = req.params.id;
+
+  Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
+  .then( survey => {
+    res.render("dashboards/user_dashboard", survey)
+  }).catch((err) => {
+    console.log(err)})
+>>>>>>> fbc013230822dd7dfbf7d4af58f5fbbfd51a0858
 
 })
+// create question
+router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
+  console.log("entra <------------------------------");
+  const questionId = req.body.params
+  const question = req.body.question
+  const surveyId = req.params.surveyId
+
+  Survey.findByIdAndUpdate(surveyId, {$push: {questions: question}}, {new:true})
+  .then( question =>{
+    console.log(question)
+    res.redirect("/designer_dashboard/" + surveyId)
+  })
+  .catch((err) => console.log(err))
+
+  
+})
+
+
 
 // Create new survey
 router.post("/designer_dashboard", (req, res, next) =>{
@@ -61,11 +92,11 @@ router.post("/designer_dashboard", (req, res, next) =>{
   if(!Array.isArray(user)){
     user=[user]
   }
-  let question = req.body.question
+  //let question = req.body.question
 
   const newSurvey = new Survey({
     title: surveyName,
-    questions: [question],
+   // questions: [question],
     access: user,
     responses: []
   })
@@ -74,8 +105,29 @@ router.post("/designer_dashboard", (req, res, next) =>{
     res.redirect("/designer_dashboard");
   })
 
+<<<<<<< HEAD
 })
 
+=======
+})
+
+// Unique survey
+router.get("/designer_dashboard/:surveyId", (req,res, next) => {
+  const surveyId = req.params.surveyId;
+  Survey.findById(surveyId)
+  .then(survey => {
+    console.log("Esta es la survey ----->", survey)
+    const id = survey._id
+    console.log(id)
+    res.render("dashboards/survey-detail", {id});
+ })
+})
+
+
+
+// Añadir redirect error
+// Añadir render con login
+>>>>>>> fbc013230822dd7dfbf7d4af58f5fbbfd51a0858
 
 
 module.exports = router;

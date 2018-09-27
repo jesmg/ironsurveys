@@ -1,13 +1,10 @@
 <h1>Designer Dashboard</h1>
-
 <form id="form" action="/designer_dashboard" method="POST">
   <input type="text" name="surveyName" id="surveyName-id" placeholder="introduce your survey">
   <br>
   <button id="create-survey">
     <small>Create Survey</small>
   </button>
-  <br>
-  <input type="text" name="question" id="question-id" placeholder="introduce your question">
   <br>
   <select multiple name="users_select" id="user_selectID">
     {{#each users}}
@@ -16,12 +13,14 @@
     </option>
     {{/each}}
   </select>
-
 </form>
 
 {{#each surveys}}
   <li>{{this.title}}</li>
-  <li>{{this.responses}}</li>
+  {{#each questions}}
+  <li>{{this}}</li>
+  {{/each}}
+  <a href="/designer_dashboard/{{this._id}}">Link</a>
 {{/each}}
 
 {{!-- esto lleva a los resultados de charts --}}
