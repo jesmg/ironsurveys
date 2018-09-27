@@ -6,6 +6,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const Survey = require("../models/Survey");
 
 const bcryptSalt = 10;
 
@@ -28,6 +29,20 @@ let users = [
     password: bcrypt.hashSync("bob", bcrypt.genSaltSync(bcryptSalt)),
   }
 ]
+
+let surveys = [
+  {
+    title: "First Survey",
+    question: [{response:"Is this a survey?"}],
+    access: [{type: Schema.Types.ObjectId, ref: 'User'}]
+  }
+]
+//ObjectID?????
+
+Survey.deleteMany()
+.then(() =>{
+  return User.create(surveys)
+})
 
 User.deleteMany()
 .then(() => {

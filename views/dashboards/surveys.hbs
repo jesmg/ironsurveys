@@ -1,3 +1,22 @@
-<h1>Survey</h1>
+<h1>{{survey.title}}</h1>
+<ul>
+  
+  <li>{{survey.questions}}</li>
+  <form action="/surveys/:id" method="post">
+    <li><input type="checkbox" value="1">1</li>
+    <li><input type="checkbox" value="2">2</li>
+    <li><input type="checkbox" value="3">3</li>
+    <li><input type="checkbox" value="4">4</li>
+    <li><input type="checkbox" value="5">5</li>
+    <li><input type="checkbox" value="6">6</li>
+    <li><input type="checkbox" value="7">7</li>
+    <li><input type="checkbox" value="8">8</li>
+    <li><input type="checkbox" value="9">9</li>
+    <li><input type="checkbox" value="10">10</li>
 
-<canvas id="chart" width="600" height="400"></canvas>
+    <button>
+      <small>Send opinion</small>
+    </button>
+
+  </form>
+</ul>

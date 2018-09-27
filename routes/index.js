@@ -2,8 +2,7 @@ const express = require('express');
 const { ensureLoggedIn, hasRole } = require('../middleware/ensureLogin');
 const router  = express.Router();
 const Survey = require('../models/Survey');
-
-
+const Users = require('../models/User');
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -14,11 +13,13 @@ router.get('/designer_dashboard', [
   ensureLoggedIn('auth/login'),
   hasRole()
 ], (req, res) =>{
-  Survey.find()
-  .then(surveys => {
-    res.render('dashboards/designer_dashboard', {surveys})
-  })
-  .catch( err => console.log(err));
+  Promise.all([
+    Survey.find(),
+    Users.find()
+  ])
+  .then(([surveys, users]) => {
+    res.render('dashboards/designer_dashboard', {surveys, users})
+  }, err => console.log(err));
 })
 
 router.get('/user_dashboard', [
@@ -32,17 +33,48 @@ router.get('/user_dashboard', [
   .catch( err => console.log(err));
 
 })
+router.get("/surveys/:id", (req, res, next) => {
+  let surveyId = req.params.id;
+  Survey.findOne({'_id':surveyId})
+  .then(survey =>{
+    res.render('dashboards/surveys', {survey})
+  })
+  .catch(err => {
+    console.log(err)
+  })
+})
+
+router.post("/surveys/:id", (req, res, next) => {
+  console.log("entra")
+  let value = req.body.value;
+  console.log(value)
+  Survey.findByIdAndUpdate(req.params.id, {$push: {responses: [value]}} ,{new:true})
+  .then( () => {
+    console.log(survey.responses)
+    res.render("dashboards/user_dashboard")
+  })
+
+})
 
 // Create new survey
 router.post("/designer_dashboard", (req, res, next) =>{
-  console.log("entra en post")
-  const question = req.body.question
+  const surveyName = req.body.surveyName
+  let user = req.body.users_select
+  
+  if(!Array.isArray(user)){
+    user=[user]
+  }
+  let question = req.body.question
+  console.log(question)
+
   const newSurvey = new Survey({
-    question
+    title: surveyName,
+    questions: [question],
+    access: user,
+    responses: []
   })
   newSurvey.save()
   .then((survey)=> {
-    console.log("survey created")
     res.redirect("/designer_dashboard");
   })
 
@@ -51,6 +83,9 @@ router.post("/designer_dashboard", (req, res, next) =>{
 // Añadir render con login
 
 
+
+// Añadir redirect error
+// Añadir render con login
 
 
 module.exports = router;

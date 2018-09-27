@@ -1,7 +1,5 @@
 const express = require('express');
-const {
-  hasRole
-} = require('../middleware/ensureLogin');
+const {hasRole} = require('../middleware/ensureLogin');
 const router = express.Router();
 
 router.get("/",

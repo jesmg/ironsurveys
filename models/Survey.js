@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const surveySchema = new Schema({
-  question: String,
-  question: [],
-  response: []
-
+    title: String,
+    questions: [String],
+    responses: [Number],
+    access: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }, {
   timestamps: {
     createdAt: 'created_at',
