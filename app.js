@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').load();
 
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -15,7 +16,7 @@ const flash      = require("connect-flash");
     
 
 mongoose
-  .connect('mongodb://localhost/ironsurveys', {useNewUrlParser: true})
+  .connect(process.env.DB, {useNewUrlParser: true})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
