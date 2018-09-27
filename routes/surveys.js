@@ -8,6 +8,10 @@ router.get("/",
     res.render("dashboards/surveys")
   })
 
+
+
+  
+
   // hacer npm install chart.js --save
 
 // coger datos de survey y ponerlos en el gráfico

@@ -45,16 +45,10 @@ router.get("/surveys/:id", (req, res, next) => {
 })
 
 router.post("/surveys/:id", (req, res, next) => {
-  
-  const check = req.body.check;
-  console.log("the value of 'check' is: " + check)
-  
+  const check = req.body.check;  
   let params = req.params.id;
-  console.log(params, "<----")
-
   Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
   .then( survey => {
-    console.log(survey.responses)
     res.render("dashboards/user_dashboard")
   }).catch((err) => console.log(err))
 
@@ -64,7 +58,6 @@ router.post("/surveys/:id", (req, res, next) => {
 router.post("/designer_dashboard", (req, res, next) =>{
   const surveyName = req.body.surveyName
   let user = req.body.users_select
-  
   if(!Array.isArray(user)){
     user=[user]
   }
@@ -82,13 +75,7 @@ router.post("/designer_dashboard", (req, res, next) =>{
   })
 
 })
-// Añadir redirect error
-// Añadir render con login
 
-
-
-// Añadir redirect error
-// Añadir render con login
 
 
 module.exports = router;
