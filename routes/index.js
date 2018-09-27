@@ -45,14 +45,18 @@ router.get("/surveys/:id", (req, res, next) => {
 })
 
 router.post("/surveys/:id", (req, res, next) => {
-  console.log("entra")
-  let value = req.body.value;
-  console.log(value)
-  Survey.findByIdAndUpdate(req.params.id, {$push: {responses: [value]}} ,{new:true})
-  .then( () => {
+  
+  const check = req.body.check;
+  console.log("the value of 'check' is: " + check)
+  
+  let params = req.params.id;
+  console.log(params, "<----")
+
+  Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
+  .then( survey => {
     console.log(survey.responses)
     res.render("dashboards/user_dashboard")
-  })
+  }).catch((err) => console.log(err))
 
 })
 
@@ -65,7 +69,6 @@ router.post("/designer_dashboard", (req, res, next) =>{
     user=[user]
   }
   let question = req.body.question
-  console.log(question)
 
   const newSurvey = new Survey({
     title: surveyName,
