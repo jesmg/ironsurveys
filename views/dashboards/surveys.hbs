@@ -1,6 +1,7 @@
 <h1>{{survey.title}}</h1>
-  <h3>{{survey.questions}}</h3>
   <form action="/surveys/{{survey._id}}" method="post">
+  {{#each survey.questions}}
+  <h3>{{this}}</h3>
       <select  name="check">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -13,6 +14,7 @@
         <option value="9">9</option>
         <option value="10">10</option>
       </select>
+  {{/each}}
     <button>
       <small>Send opinion</small>
     </button>
