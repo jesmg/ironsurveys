@@ -1,30 +1,37 @@
 <h2>Signup</h2>
 
-<form action="/auth/signup" method="POST" id="form-container">
+<form action="/auth/signup" method="POST" id="form-container"> 
+  <br>
+  <div>
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" placeholder="Your username">
+  </div>
+
+  <br><br>
+  <div>
   <label for="email">Email</label>
   <input id="email" type="email" name="email" placeholder="Your email">
   <br> {{#if message }}
   <div class="error-message">{{ message }}</div>
   {{/if}}
+  </div>
+    <br><br>
 
-  <br><br>
-
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" placeholder="JonSnow">
-
-  <br><br>
-
+  <div>
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
   <br> {{#if message }}
   <div class="error-message">{{ message }}</div>
   {{/if}}
+  </div>
 
   <br><br>
+  <div>
   <select class="custom-select" name="role">
     <option value="User">User</option>
     <option value="Designer">Designer</option>
   </select>
+  </div>
 
   <button>Create account</button>
 
