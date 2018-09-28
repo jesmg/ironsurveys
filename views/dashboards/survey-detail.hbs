@@ -18,27 +18,7 @@
   </div>
   <div class="row">
     <div class="col-md-4">
-      <h2>Your data:</h2>
-
-
-      {{#each surveys}}
-      <div class="col-4">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title"><a href="/surveys/results/{{this._id}}">{{this.title}}</a></h5>
-          </div>
-        </div>
-
-      </div>
-      {{/each}}
-
-
+      <h2><a href="surveys/results/{{this._id}}">Your survey data</a></h2>
     </div>
   </div>
-
-  </div>
-  </div>
-
-
 </section>
-<br>
