@@ -1,30 +1,27 @@
 <br>
 <section class="container-fluid">
-<h2>{{this.title}}</h2>
+  <h2>{{this.title}}</h2>
+<div class="row">
 
   <form action="/designer_dashboard/{{id}}" method="post">
-    <div class="col-md-3">
+    <div class="col-md-12">
       <label for="">Add questions to your survey:</label>
       <input type="text" class="form-control" name="question" id="question-id" placeholder="introduce your question">
     </div>
     <br>
-    <div class="col-md-3">
+    <div class="col-md-8">
       <button id="create-question">
         <small>Add question</small>
       </button>
     </div>
   </form>
+</div>
+  <div class="row">
+    <div class="col-md-8">
+    <h2><a href="dashboards/results">You survey data: </a></h2>
+    </div>
+  </div>
+
+  </div>
 </section>
 <br>
-<section class="container-fluid">
-  <div class="row">
-    <div class="col-md-4">
-      <h2>Your data:</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="box" style="width:100%; height:600px; background-color:aqua; opacity:0.5;">
-
-    </div>
-  </div>
-</section>

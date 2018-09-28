@@ -98,10 +98,7 @@ router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
   })
   .catch((err) => console.log(err))
 
-  
 })
-
-
 
 // Unique survey
 router.get("/designer_dashboard/:surveyId", (req,res, next) => {
