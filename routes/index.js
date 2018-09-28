@@ -37,6 +37,7 @@ router.get("/surveys/:id", (req, res, next) => {
   let surveyId = req.params.id;
   Survey.findById(surveyId)
   .then(survey =>{
+    console.log(survey._id)
     res.render('dashboards/surveys', {survey})
   })
   .catch(err => {
@@ -44,20 +45,46 @@ router.get("/surveys/:id", (req, res, next) => {
   })
 })
 
-//  Select value 
+//  Survey answers 
 router.post("/surveys/:id", (req, res, next) => {
   
   const check = req.body.check;
   let params = req.params.id;
+  const responseId = req.params.id
+
 
   Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
   .then( survey => {
-    res.render("dashboards/user_dashboard", survey)
+    console.log(survey)
+    res.redirect(`/surveys/` + responseId)
   }).catch((err) => {
     console.log(err)})
 
 })
 // create question
+// Create new survey
+router.post("/designer_dashboard", (req, res, next) =>{
+  const surveyName = req.body.surveyName
+  let user = req.body.users_select
+  if(!Array.isArray(user)){
+    user=[user]
+  }
+  //let question = req.body.question
+  console.log("entra")
+
+  const newSurvey = new Survey({
+    title: surveyName,
+   //questions: [question],
+    access: user,
+    responses: []
+  })
+  newSurvey.save()
+  .then(survey=> {
+    console.log(survey)
+    res.redirect("/designer_dashboard");
+  })
+
+})
 router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
   console.log("entra <------------------------------");
   const questionId = req.body.params
@@ -76,28 +103,6 @@ router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
 
 
 
-// Create new survey
-router.post("/designer_dashboard", (req, res, next) =>{
-  const surveyName = req.body.surveyName
-  let user = req.body.users_select
-  if(!Array.isArray(user)){
-    user=[user]
-  }
-  //let question = req.body.question
-
-  const newSurvey = new Survey({
-    title: surveyName,
-   // questions: [question],
-    access: user,
-    responses: []
-  })
-  newSurvey.save()
-  .then((survey)=> {
-    res.redirect("/designer_dashboard");
-  })
-
-})
-
 // Unique survey
 router.get("/designer_dashboard/:surveyId", (req,res, next) => {
   const surveyId = req.params.surveyId;
@@ -105,9 +110,10 @@ router.get("/designer_dashboard/:surveyId", (req,res, next) => {
   .then(survey => {
     console.log("Esta es la survey ----->", survey)
     const id = survey._id
+    const title = survey.title
     console.log(id)
-    res.render("dashboards/survey-detail", {id});
- })
+    res.render("dashboards/survey-detail", {id, title});
+ }).catch((err) => console.log(err))
 })
 
 

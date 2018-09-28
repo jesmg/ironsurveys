@@ -1,22 +1,32 @@
-<h1>{{survey.title}}</h1>
-  <form action="/surveys/{{survey._id}}" method="post">
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="surveys-response-title">{{survey.title}}</h1>
+  </div>
   {{#each survey.questions}}
-  <h3>{{this}}</h3>
-      <select  name="check">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
+  <div class="row d-flex justify-content-center">
+    <div class="col-8 card card-response ">
+      <br>
+      <form action="/surveys/{{../survey._id}}" method="post">
+        <h3>{{this}}</h3>
+        <select name="check">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        <button type="submit">
+          <small>Send opinion</small>
+        </button>
+      </form>
+      <br>
+    </div>
+  </div>
   {{/each}}
-    <button>
-      <small>Send opinion</small>
-    </button>
-  </form>
-</ul>
+
+</div>

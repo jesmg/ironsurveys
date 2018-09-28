@@ -1,29 +1,50 @@
-<h1>Designer Dashboard</h1>
-<form id="form" action="/designer_dashboard" method="POST">
-  <input type="text" name="surveyName" id="surveyName-id" placeholder="introduce your survey">
-  <br>
-  <button id="create-survey">
-    <small>Create Survey</small>
-  </button>
-  <br>
-  <select multiple name="users_select" id="user_selectID">
-    {{#each users}}
-    <option value="{{this.id}}">
-      {{this.username}}
-    </option>
-    {{/each}}
-  </select>
-</form>
+<div class="wrapper">
+  <div class="container-fluid">
+    <h1>Your Dashboard</h1>
+    <form id="form" action="/designer_dashboard" method="POST">
 
-{{#each surveys}}
-  <li>{{this.title}}</li>
-  {{#each questions}}
-  <li>{{this}}</li>
+      <div class="form-group">
+        <div class="col-3">
+
+          <label for="exampleFormControlInput1">Introduce your new survey's name</label>
+        </div>
+
+        <div class="col-3">
+          <input type="text" class="form-control" name="surveyName" id="surveyName-id" placeholder="introduce your survey">
+        </div>
+        <br>
+        <div class="col-3">
+          <button id="create-survey">
+            <small>Create Survey</small>
+          </button>
+        </div>
+      </div>
+      <div class="col-3">
+        <select class="custom-select" multiple name="users_select" id="user_selectID">
+          {{#each users}}
+          <option value="{{this.id}}">
+            {{this.username}}
+          </option>
+          {{/each}}
+        </select>
+      </div>
+
+    </form>
+  </div>
+  <div class="container-fluid">
+<div class="row">
+  {{#each surveys}}
+  <div class="col-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><a href="/designer_dashboard/{{this._id}}">{{this.title}}</a></h5>
+    </div>
+  </div>
+
+  </div>
   {{/each}}
-  <a href="/designer_dashboard/{{this._id}}">Link</a>
-{{/each}}
+  
+</div>
 
-{{!-- esto lleva a los resultados de charts --}}
- {{#each surveys}}
-  <h3><a href="surveys/{{this._id}}">{{this.title}}</a></h3>
-{{/each}}
+  </div>
+

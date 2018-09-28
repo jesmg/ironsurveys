@@ -1,17 +1,53 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
-
-<nav>
+<div class="nav-wrapper">
+  <nav>
     <a href="/">Home</a>
     <a href="/auth/login">Login</a>
     <a href="/auth/signup">Signup</a>
     <a href="/auth/logout">Logout</a>
   </nav>
+</div>
 
-<div>
-  <p>
-   {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
-  </p>
+<div class="container-fluid d-flex cover-page">
+  <div class="col-md-12 d-flex justify-content-center align-items-center" style="height:800px;">
+    <header>
+      <section>
+        <h1>Iron Surveys</h1>
+        <span>The app for designers</span>
+      </section>
+      <section>
+        <button><a href="/designer_dashboard">Designer</a></button>
+        <button><a href="/user_dashboard">User</a></button>
+      </section>
+    </header>
+
   </div>
+</div>
+
+<footer class="footer">
+    <div class="container-fluid py-3">
+        <div class="row">
+            <div class="col-md-3">
+              <ul>
+                
+              </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">Made by <a href="#">Celia</a>& <a href="#">Sara</a></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3 text-right small align-self-end">©2017 Brand, Inc.</div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+    {{#if message }}
+    <div class="error-message">{{ message }}</div>
+    {{/if}}
+
