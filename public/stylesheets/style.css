@@ -4,7 +4,8 @@
 
 
 body {
-  font: 14px "Open sans"; 
+  font-size: 14px;
+  font-family: sans-serif; 
 }
 
 a {
