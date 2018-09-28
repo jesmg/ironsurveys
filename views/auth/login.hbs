@@ -1,7 +1,39 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 phrlogin">
+      <p>Happy to see you again!</p>
+    </div>
 
-<h2>Login</h2>
 
-<form action="/auth/login" method="POST" id="form-container">
+    <div class="col-md-6">
+
+      <form action="/auth/login" method="POST" id="form-container" class="formlog">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" class="form-control" id="username" placeholder="Your username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Your password">
+        </div>
+        <button type="button" class="btn btn-primary">Login</button>
+
+        <p class="account-message">
+          Don't have an account yet?
+          <a href="/auth/signup">Signup</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+{{!-- <form action="/auth/login" method="POST" id="form-container" class="formlog">
   <label for="username">Username</label>
   <input id="username" type="text" name="username" placeholder="JonSnow">
 
@@ -10,10 +42,6 @@
   <label for="password">Password</label>
   <input id="password" type="password" name="password" placeholder="Your password">
   <br>
-  {{#if message }}
-    <div class="error-message">{{ message }}</div>
-  {{/if}}
-
   <br><br>
 
   <button>Login</button>
@@ -22,4 +50,4 @@
     Don't have an account yet?
     <a href="/auth/signup">Signup</a>
   </p>
-</form>
+  --}}

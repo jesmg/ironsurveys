@@ -46,14 +46,6 @@ router.get("/surveys/:id", (req, res, next) => {
 
 //  Select value 
 router.post("/surveys/:id", (req, res, next) => {
-<<<<<<< HEAD
-  const check = req.body.check;  
-  let params = req.params.id;
-  Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
-  .then( survey => {
-    res.render("dashboards/user_dashboard")
-  }).catch((err) => console.log(err))
-=======
   
   const check = req.body.check;
   let params = req.params.id;
@@ -63,12 +55,10 @@ router.post("/surveys/:id", (req, res, next) => {
     res.render("dashboards/user_dashboard", survey)
   }).catch((err) => {
     console.log(err)})
->>>>>>> fbc013230822dd7dfbf7d4af58f5fbbfd51a0858
 
 })
 // create question
 router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
-  console.log("entra <------------------------------");
   const questionId = req.body.params
   const question = req.body.question
   const surveyId = req.params.surveyId
@@ -105,10 +95,6 @@ router.post("/designer_dashboard", (req, res, next) =>{
     res.redirect("/designer_dashboard");
   })
 
-<<<<<<< HEAD
-})
-
-=======
 })
 
 // Unique survey
@@ -127,7 +113,6 @@ router.get("/designer_dashboard/:surveyId", (req,res, next) => {
 
 // Añadir redirect error
 // Añadir render con login
->>>>>>> fbc013230822dd7dfbf7d4af58f5fbbfd51a0858
 
 
 module.exports = router;

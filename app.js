@@ -61,8 +61,8 @@ hbs.registerHelper('ifUndefined', (value, options) => {
   
 
 // default value for title local
-app.locals.title = 'Welcome to Iron - Surveys';
-
+/* app.locals.title = 'Welcome to Iron - Surveys';
+ */
 
 // Enable authentication using session + passport
 app.use(session({

@@ -1,8 +1,47 @@
+/* #9100FF
+#FFAD4D
+ */
+
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Open sans"; 
+}
 
 a {
   color: #00B7FF; }
 
-/*# sourceMappingURL=style.css.map */
+  .footer {
+    background: #9100FF;
+    padding: 10px 0;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer a {
+    color: #FFAD4D;
+    font-size: 20px;
+    padding: 10px;
+    border-right: 1px solid #FFAD4D;
+    transition: all .5s ease;
+  }
+  .footer a:first-child {
+    border-left: 1px solid #FFAD4D;
+  }
+  .footer a:hover {
+    color: white;
+  }
+
+  
+  /* desde aqui es el login y el signup */
+
+  .phrlogin {
+    font-size: 60px;
+    margin-top: 15%;
+  }
+
+  .formlog {
+  margin-top: 30%;
+  }
+
+
