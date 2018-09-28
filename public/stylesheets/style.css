@@ -4,9 +4,9 @@
 
 
 body {
-  font-size: 14px;
-  font-family: sans-serif; 
-}
+  padding: 0;
+  margin: 0;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
   color: #00B7FF; }
@@ -46,3 +46,16 @@ a {
   }
 
 
+.card{
+  margin:20px;
+  text-align: center;
+  
+}
+.card-body{
+  margin: 0 auto;
+}
+
+.surveys-response-title{
+  padding:60px;
+}
+/*# sourceMappingURL=style.css.map */

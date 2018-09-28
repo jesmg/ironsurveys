@@ -1,4 +1,18 @@
-<h1>User dashboard</h1>
-{{#each surveys}}
-  <h3><a href="surveys/{{this._id}}">{{this.title}}</a></h3>
-{{/each}}
+<div class="container-fluid">
+
+  <h1>User dashboard</h1>
+  {{#each surveys}} {{/each}}
+
+  <div class="row">
+    {{#each surveys}}
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <h4><a href="surveys/{{this._id}}">{{this.title}}</a></h4>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+</div>

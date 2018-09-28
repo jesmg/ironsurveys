@@ -24,6 +24,7 @@ router.get("/surveys/:id", (req, res, next) => {
   let surveyId = req.params.id;
   Survey.findById(surveyId)
   .then(survey =>{
+    console.log(survey._id)
     res.render('dashboards/surveys', {survey})
   })
   .catch(err => {
@@ -31,15 +32,18 @@ router.get("/surveys/:id", (req, res, next) => {
   })
 })
 
-//  Select value 
+//  Survey answers 
 router.post("/surveys/:id", (req, res, next) => {
   
   const check = req.body.check;
   let params = req.params.id;
+  const responseId = req.params.id
+
 
   Survey.findByIdAndUpdate(params, {$push: {responses: check}} ,{new:true})
   .then( survey => {
-    res.render("dashboards/user_dashboard", survey)
+    console.log(survey)
+    res.redirect(`/surveys/` + responseId)
   }).catch((err) => {
     console.log(err)})
 
@@ -65,17 +69,39 @@ router.post("/designer_dashboard", (req, res, next) =>{
   if(!Array.isArray(user)){
     user=[user]
   }
+  //let question = req.body.question
+  console.log("entra")
+
   const newSurvey = new Survey({
     title: surveyName,
+   //questions: [question],
     access: user,
     responses: []
   })
   newSurvey.save()
-  .then((survey)=> {
+  .then(survey=> {
+    console.log(survey)
     res.redirect("/designer_dashboard");
   })
 
 })
+router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
+  console.log("entra <------------------------------");
+  const questionId = req.body.params
+  const question = req.body.question
+  const surveyId = req.params.surveyId
+
+  Survey.findByIdAndUpdate(surveyId, {$push: {questions: question}}, {new:true})
+  .then( question =>{
+    console.log(question)
+    res.redirect("/designer_dashboard/" + surveyId)
+  })
+  .catch((err) => console.log(err))
+
+  
+})
+
+
 
 // Unique survey
 router.get("/designer_dashboard/:surveyId", (req,res, next) => {
@@ -83,8 +109,10 @@ router.get("/designer_dashboard/:surveyId", (req,res, next) => {
   Survey.findById(surveyId)
   .then(survey => {
     const id = survey._id
-    res.render("dashboards/survey-detail", {id});
- })
+    const title = survey.title
+    console.log(id)
+    res.render("dashboards/survey-detail", {id, title});
+ }).catch((err) => console.log(err))
 })
 
 // create question
