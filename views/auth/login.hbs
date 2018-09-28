@@ -10,19 +10,19 @@
       <form action="/auth/login" method="POST" id="form-container" class="formlog">
         <div class="form-group">
           <label for="username">Username</label>
-          <input type="text" name="username" class="form-control" id="username" placeholder="Your username">
+          <input id="username" type="username" name="username" class="form-control" placeholder="Your username">
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" id="password" class="form-control" placeholder="Your password">
+          <input id="password" type="password" name="password" class="form-control" placeholder="Your password">
         </div>
-        <button type="button" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
 
         <p class="account-message">
           Don't have an account yet?
           <a href="/auth/signup">Signup</a>
         </p>
-      </form>
     </div>
   </div>
 </div>

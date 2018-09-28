@@ -12,26 +12,17 @@ a {
   color: #00B7FF; }
 
   .footer {
-    background: #9100FF;
-    padding: 10px 0;
-    width: 100%;
-    position: absolute;
+    position: fixed;
+    left: 0;
     bottom: 0;
     width: 100%;
+    background: #9100FF;
   }
   .footer a {
     color: #FFAD4D;
-    font-size: 20px;
-    padding: 10px;
-    border-right: 1px solid #FFAD4D;
     transition: all .5s ease;
   }
-  .footer a:first-child {
-    border-left: 1px solid #FFAD4D;
-  }
-  .footer a:hover {
-    color: white;
-  }
+  
 
   
   /* desde aqui es el login y el signup */
