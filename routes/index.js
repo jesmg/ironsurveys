@@ -9,19 +9,6 @@ router.get('/', (req, res, next) => {
   res.render('index');
 });
 
-router.get('/designer_dashboard', [
-  ensureLoggedIn('auth/login'),
-  hasRole()
-], (req, res) =>{
-  Promise.all([
-    Survey.find(),
-    Users.find()
-  ])
-  .then(([surveys, users]) => {
-    res.render('dashboards/designer_dashboard', {surveys, users})
-  }, err => console.log(err));
-})
-
 router.get('/user_dashboard', [
   ensureLoggedIn('auth/login'),
   hasRole(undefined ,'User')
@@ -57,23 +44,19 @@ router.post("/surveys/:id", (req, res, next) => {
     console.log(err)})
 
 })
-// create question
-router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
-  const questionId = req.body.params
-  const question = req.body.question
-  const surveyId = req.params.surveyId
 
-  Survey.findByIdAndUpdate(surveyId, {$push: {questions: question}}, {new:true})
-  .then( question =>{
-    console.log(question)
-    res.redirect("/designer_dashboard/" + surveyId)
-  })
-  .catch((err) => console.log(err))
-
-  
+router.get('/designer_dashboard', [
+  ensureLoggedIn('auth/login'),
+  hasRole()
+], (req, res) =>{
+  Promise.all([
+    Survey.find(),
+    Users.find()
+  ])
+  .then(([surveys, users]) => {
+    res.render('dashboards/designer_dashboard', {surveys, users})
+  }, err => console.log(err));
 })
-
-
 
 // Create new survey
 router.post("/designer_dashboard", (req, res, next) =>{
@@ -82,11 +65,8 @@ router.post("/designer_dashboard", (req, res, next) =>{
   if(!Array.isArray(user)){
     user=[user]
   }
-  //let question = req.body.question
-
   const newSurvey = new Survey({
     title: surveyName,
-   // questions: [question],
     access: user,
     responses: []
   })
@@ -102,17 +82,24 @@ router.get("/designer_dashboard/:surveyId", (req,res, next) => {
   const surveyId = req.params.surveyId;
   Survey.findById(surveyId)
   .then(survey => {
-    console.log("Esta es la survey ----->", survey)
     const id = survey._id
-    console.log(id)
     res.render("dashboards/survey-detail", {id});
  })
 })
 
+// create question
+router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
+  const questionId = req.body.params
+  const question = req.body.question
+  const surveyId = req.params.surveyId
 
+  Survey.findByIdAndUpdate(surveyId, {$push: {questions: question}}, {new:true})
+  .then( question =>{
+    res.redirect("/designer_dashboard/" + surveyId)
+  })
+  .catch((err) => console.log(err))
+})
 
-// Añadir redirect error
-// Añadir render con login
 
 
 module.exports = router;

@@ -18,8 +18,6 @@ router.get("/",
     .then(survey =>{
       let responses = JSON.stringify(survey.responses)
       let questions = JSON.parse(JSON.stringify(survey.questions))
-      console.log("esto son las responses --------------------" + responses)
-      console.log("esto son las questions --------------------" + questions)
       res.render('dashboards/results', {survey, responses, questions})
     })
     .catch(err => {
