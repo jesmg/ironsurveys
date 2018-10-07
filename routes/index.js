@@ -87,7 +87,6 @@ router.post("/designer_dashboard", (req, res, next) =>{
 })
 router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
   console.log("entra <------------------------------");
-  const questionId = req.body.params
   const question = req.body.question
   const surveyId = req.params.surveyId
 
@@ -114,7 +113,6 @@ router.get("/designer_dashboard/:surveyId", (req,res, next) => {
 
 // create question
 router.post("/designer_dashboard/:surveyId", (req, res, next) =>{
-  const questionId = req.body.params
   const question = req.body.question
   const surveyId = req.params.surveyId
 
